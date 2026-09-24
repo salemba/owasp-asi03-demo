@@ -16,6 +16,8 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
+      keycloak:
+        condition: service_healthy
       support-agent:
         condition: service_healthy
 
@@ -34,6 +36,8 @@ services:
       timeout: 5s
       retries: 5
     depends_on:
+      keycloak:
+        condition: service_healthy
       settlement-agent:
         condition: service_healthy
 
@@ -51,6 +55,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    depends_on:
+      keycloak:
+        condition: service_healthy
 
   finance-approval:
     build:
@@ -68,6 +75,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    depends_on:
+      keycloak:
+        condition: service_healthy
 
   mcp-orders:
     build:
@@ -147,20 +157,23 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.0
-    command: ["start-dev", "--import-realm", "--health-enabled=true"]
+    command: ["start-dev", "--import-realm"]
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+      KC_HTTP_MANAGEMENT_PORT: "9000"
     volumes:
       - ./infra/keycloak/realm-shopsphere.json:/opt/keycloak/data/import/realm-shopsphere.json:ro
     ports:
       - "8080:8080"
     healthcheck:
-      test: ["CMD", "bash", "-c", "ps -ef | grep -q '[o]rg.keycloak.quarkus.runtime.Main'"]
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000 && printf 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && grep -q '\"UP\"' <&3"]
       interval: 10s
       timeout: 5s
-      retries: 10
-      start_period: 30s
+      retries: 30
+      start_period: 120s
 
   opa:
     image: openpolicyagent/opa:0.69.0

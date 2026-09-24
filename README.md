@@ -33,3 +33,8 @@ uv run poe check
 ```
 
 `make` remains available as a thin compatibility wrapper around `uv run poe <task>`.
+
+## Troubleshooting (Windows)
+
+- Ensure Docker Desktop is configured with the WSL2 backend and allocated at least 6 GB of RAM.
+- The first container start (`uv run poe up`) can take around 2 minutes while Keycloak performs its initial DB schema setup and realm import.
