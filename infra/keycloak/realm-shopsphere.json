@@ -1,0 +1,47 @@
+{
+  "realm": "shopsphere",
+  "enabled": true,
+  "roles": {
+    "realm": [
+      {"name": "customer"},
+      {"name": "support_supervisor"},
+      {"name": "finance_manager"}
+    ]
+  },
+  "clients": [
+    {"clientId": "gateway", "protocol": "openid-connect", "publicClient": false, "enabled": true},
+    {"clientId": "support-agent", "protocol": "openid-connect", "publicClient": false, "enabled": true},
+    {"clientId": "settlement-agent", "protocol": "openid-connect", "publicClient": false, "enabled": true},
+    {"clientId": "finance-approval", "protocol": "openid-connect", "publicClient": false, "enabled": true}
+  ],
+  "users": [
+    {
+      "username": "alice",
+      "email": "alice@shopsphere.test",
+      "enabled": true,
+      "credentials": [{"type": "password", "value": "alice-pass", "temporary": false}],
+      "realmRoles": ["customer"]
+    },
+    {
+      "username": "bob",
+      "email": "bob@shopsphere.test",
+      "enabled": true,
+      "credentials": [{"type": "password", "value": "bob-pass", "temporary": false}],
+      "realmRoles": ["customer"]
+    },
+    {
+      "username": "sam.supervisor",
+      "email": "sam.supervisor@shopsphere.test",
+      "enabled": true,
+      "credentials": [{"type": "password", "value": "sam-pass", "temporary": false}],
+      "realmRoles": ["support_supervisor"]
+    },
+    {
+      "username": "fiona.finance",
+      "email": "fiona.finance@shopsphere.test",
+      "enabled": true,
+      "credentials": [{"type": "password", "value": "fiona-pass", "temporary": false}],
+      "realmRoles": ["finance_manager"]
+    }
+  ]
+}

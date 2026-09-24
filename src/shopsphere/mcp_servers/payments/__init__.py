@@ -1,0 +1,1 @@
+"""Payments MCP server."""

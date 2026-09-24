@@ -1,0 +1,1 @@
+"""Finance approval adapters package."""

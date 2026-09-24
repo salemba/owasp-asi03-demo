@@ -1,0 +1,1 @@
+"""CRM MCP adapters package."""
