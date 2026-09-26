@@ -282,4 +282,3 @@ def downgrade() -> None:
     op.drop_index("ix_support_tickets_customer_id", table_name="support_tickets", schema="crm")
     op.drop_table("support_tickets", schema="crm")
     op.drop_table("customers", schema="crm")
-
