@@ -15,6 +15,6 @@ def test_money_quantizes_to_two_decimals() -> None:
 
 
 @pytest.mark.unit
-def test_money_rejects_non_positive_values() -> None:
+def test_money_rejects_negative_values() -> None:
     with pytest.raises(ValueError):
-        Money(amount=Decimal("0"), currency="EUR")
+        Money(amount=Decimal("-1.00"), currency="EUR")

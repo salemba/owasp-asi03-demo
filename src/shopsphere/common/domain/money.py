@@ -8,7 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 class Money(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    amount: Decimal = Field(gt=Decimal("0"))
+    amount: Decimal = Field(ge=Decimal("0"))
     currency: str = Field(min_length=3, max_length=3)
 
     @field_validator("amount")

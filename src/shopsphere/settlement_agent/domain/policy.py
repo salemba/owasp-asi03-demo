@@ -13,6 +13,10 @@ def is_within_refund_window(*, delivered_at: datetime | None, now: datetime | No
     if delivered_at is None:
         return False
     reference_now = now or datetime.now(UTC)
+    if delivered_at.tzinfo is None:
+        delivered_at = delivered_at.replace(tzinfo=UTC)
+    if reference_now.tzinfo is None:
+        reference_now = reference_now.replace(tzinfo=UTC)
     return reference_now - delivered_at <= timedelta(days=MAX_REFUND_WINDOW_DAYS)
 
 

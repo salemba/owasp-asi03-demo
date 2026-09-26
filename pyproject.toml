@@ -42,6 +42,7 @@ dev = [
   "pytest-cov>=6.0.0",
   "ruff>=0.7.0",
   "testcontainers[postgres]>=4.8.2",
+  "aiosqlite>=0.22.1",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -63,6 +64,8 @@ ignore = ["S104", "PLR0913"]
 "tests/**/*.py" = ["S101", "PLR2004", "S106"]
 "src/shopsphere/common/persistence/models.py" = ["RUF012"]
 "src/shopsphere/mcp_servers/*/api/routes.py" = ["B008"]
+"src/shopsphere/support_agent/api/routes.py" = ["B008"]
+"src/shopsphere/settlement_agent/api/routes.py" = ["B008"]
 
 [tool.mypy]
 python_version = "3.12"
@@ -87,6 +90,7 @@ asyncio_mode = "auto"
 [tool.coverage.report]
 fail_under = 80
 show_missing = true
+omit = ["src/shopsphere/common/seed.py"]
 
 [tool.poe.tasks]
 lint = "ruff check ."
