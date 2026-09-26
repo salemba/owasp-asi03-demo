@@ -1,5 +1,10 @@
 # ShopSphere
 
+[![CI](https://github.com/salemba/owasp-asi03-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/USER/REPO/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/python-3.12-blue)
+![Ruff](https://img.shields.io/badge/lint-ruff-000000)
+![License](https://img.shields.io/badge/license-Apache--2.0-green)
+
 Production-grade teaching platform for demonstrating OWASP ASI03 (Identity and Privilege Abuse)
 in a multi-agent e-commerce system.
 
